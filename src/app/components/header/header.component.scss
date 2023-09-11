@@ -1,0 +1,63 @@
+ion-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222222;
+
+    padding: 0px 20px;
+    height: 10vh;
+
+    div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    #right-box {
+        width: 50vw;
+        height: 100%;
+
+        display: flex;
+        justify-content: space-between;
+
+        #logo {
+            width: 100px;
+        }
+
+        #searchbar {
+            background-color: #fff;
+            padding: 10px;
+            height: 50%;
+            width: 80%;
+
+            border: 0;
+            border-radius: 10px;
+            color: #000;
+            outline: none;
+        }
+
+        #searchbar::placeholder {
+            color: #212121;
+            font-weight: bolder;
+        }
+    }
+
+    #left-box {
+        gap: 30px;
+
+        #login-box, #favorite-box, #cart-box {
+            ion-icon {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        #login-box {
+            gap:10px;
+            p {
+                font-size: 12px;
+            }
+        }
+    }
+}
