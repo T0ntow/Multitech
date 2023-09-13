@@ -8,6 +8,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 //components
 import { HeaderComponent } from 'src/app/components/header/header.component';
+import { ProductComponent } from 'src/app/components/product/product.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { HeaderComponent } from 'src/app/components/header/header.component';
   ],
   declarations: [
     HomePage,
-    HeaderComponent]
+    HeaderComponent,
+    ProductComponent]
 })
 export class HomePageModule {}

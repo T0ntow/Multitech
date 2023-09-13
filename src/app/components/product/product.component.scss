@@ -1,0 +1,54 @@
+.product {
+    height: 500px;
+    width: clamp(235px, 5vw, 255px);
+
+    background-color: #e6e6e6;
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+
+    #product-image {
+    }
+
+    #product-content {
+        padding: 5px;
+
+        #product-name {
+            color: #000;
+            margin: 20px 0;
+            font-size: clamp(14px, 3vw, 15px);
+        }
+
+        #product-price {
+            color: #14c91b;
+            font-size: 1.5rem;
+
+            span {
+                font-size: 1rem;
+            }
+        }
+
+        #product-discount {
+            color: #4b4b4b;
+        }
+    }
+
+    #product-favorite {
+        position: absolute;
+        cursor: pointer;
+        bottom: 10px;
+        left: 5px;
+
+        color: #ff4e4e;
+        width: 35px;
+        height: 35px;
+    }
+
+    #product-favorite:hover {
+        transition: .3s ease-in-out;
+        color: #ff0000;
+        transform: scale(1.1);
+    }
+}
