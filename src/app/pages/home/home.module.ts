@@ -10,12 +10,14 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { ProductComponent } from 'src/app/components/product/product.component';
 
+//http
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
   ],
   declarations: [
     HomePage,
