@@ -1,16 +1,18 @@
 <ion-content [fullscreen]="true">
   <main>
-    <ion-card id="login-box">
+    <ion-card id="signup-box">
       <ion-card-header>
-        <a id="login-link" class="selected-login"  href="/login">Login</a>
-        <a id="signup-link"  href="/signup">Signup</a>
+        <a id="login-link"  href="/login">Login</a>
+        <a id="signup-link" class="selected-signup"  href="/signup">Signup</a>
       </ion-card-header>
+    
       <ion-card-content>
+        <ion-input label="Username:" labelPlacement="stacked"></ion-input>
         <ion-input label="Email:" labelPlacement="stacked"></ion-input>
         <ion-input label="Password:" labelPlacement="stacked"></ion-input>
 
-        <ion-button>Login</ion-button>
-        <span>Dont have an account? <a href="/signup">Signup</a></span>
+        <ion-button>Signup</ion-button>
+        <span>Already have an account? <a href="/login">Login</a></span>
 
         <ion-button color="dark">
           <ion-icon name="logo-google"></ion-icon>
