@@ -2,16 +2,19 @@
   <main>
     <ion-card id="signup-box">
       <ion-card-header>
-        <a id="login-link"  href="/login">Login</a>
-        <a id="signup-link" class="selected-signup"  href="/signup">Signup</a>
+        <a id="login-link" href="/login">Login</a>
+        <a id="signup-link" class="selected-signup" href="/signup">Signup</a>
       </ion-card-header>
-    
-      <ion-card-content>
-        <ion-input label="Username:" labelPlacement="stacked"></ion-input>
-        <ion-input label="Email:" labelPlacement="stacked"></ion-input>
-        <ion-input label="Password:" labelPlacement="stacked"></ion-input>
 
-        <ion-button>Signup</ion-button>
+      <ion-card-content>
+        <form [formGroup]="signupForm" (ngSubmit)="submitForm()">
+          <ion-input label="Username:" labelPlacement="stacked" formControlName="name"></ion-input>
+          <ion-input label="Email:" labelPlacement="stacked" formControlName="email"></ion-input>
+          <ion-input label="Password:" labelPlacement="stacked" formControlName="password" type="password"></ion-input>
+
+          <ion-button type="submit" [disabled]="!signupForm.valid">Signup</ion-button>
+        </form>
+
         <span>Already have an account? <a href="/login">Login</a></span>
 
         <ion-button color="dark">
