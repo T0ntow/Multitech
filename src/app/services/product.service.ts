@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ProductService {
   private observerProdutct = new Subject()
-  private apiUrl = 'http://localhost:3000/produtos'; // Substitua pela URL do seu servidor Express
+  private apiUrl = 'https://multitech-api.onrender.com/produtos'; // Substitua pela URL do seu servidor Express
 
   constructor(private http: HttpClient) {}
 
@@ -25,18 +25,18 @@ export class ProductService {
   }
 
   newProduct(productData: any) {
-    return this.http.post('http://localhost:3000/adicionar-produto', productData)
+    return this.http.post('https://multitech-api.onrender.com/adicionar-produto', productData)
   }
 
   getProducts() {
-    return this.http.get('http://localhost:3000/produtos')
+    return this.http.get('https://multitech-api.onrender.com/produtos')
   }
   
   deleteProduct(codigo: any) {
-    return this.http.delete(`http://localhost:3000/deletar-produto/${codigo}`)
+    return this.http.delete(`https://multitech-api.onrender.com/deletar-produto/${codigo}`)
   }
 
   editProduct(productData: any, codigo: any) {
-    return this.http.put(`http://localhost:3000/editar-produto/${codigo}`, productData)
+    return this.http.put(`https://multitech-api.onrender.com/editar-produto/${codigo}`, productData)
   }
 }
