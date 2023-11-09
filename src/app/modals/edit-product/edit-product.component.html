@@ -1,0 +1,28 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Editar Produto</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <form  [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="form-group">
+          <ion-input type="number" id="codigo" placeholder="Código" formControlName="codigo" label="Código" label-placement="floating"></ion-input>
+        </div>
+        <div class="form-group">
+          <ion-input type="text" id="nome" placeholder="Nome" formControlName="nome" label="Nome" label-placement="floating"></ion-input>
+        </div>
+        <div class="form-group">
+          <ion-input type="number" id="estoque" placeholder="Estoque" formControlName="estoque" label="Estoque" label-placement="floating"></ion-input>
+        </div>
+        <div class="form-group">
+          <ion-input type="number" id="preco" placeholder="Preço" formControlName="preco" label="Preço" label-placement="floating"></ion-input>
+        </div>
+        <div class="form-group">
+          <ion-input type="number" id="percent" placeholder="% de Comissão" formControlName="percent" label="% de Comissão" label-placement="floating"></ion-input>
+        </div>
+      </div>
+      <ion-button type="submit">Editar Produto</ion-button>
+    </form>
+  </ion-card-content>
+</ion-card>
