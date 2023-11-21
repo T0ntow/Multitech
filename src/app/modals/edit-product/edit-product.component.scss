@@ -7,9 +7,15 @@ ion-card {
 
     ion-card-header {
         background-color: #222222;
-        ion-card-title {
-            color: #228dff;
-            font-size: 1.4rem;
+        padding: 5px 10px;
+
+        ion-toolbar {
+            background-color: #222222;
+
+            ion-card-title {
+                color: #228dff;
+                font-size: 1.4rem;
+            }
         }
     }
 

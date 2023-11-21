@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
 import { ModalController } from '@ionic/angular';
 import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
-
+import { ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-crud-product',
   templateUrl: './crud-product.page.html',
@@ -17,7 +17,8 @@ export class CrudProductPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private toastController: ToastController
   ) {
 
     this.productService.getObservableProducts().subscribe(isUpdated => {
@@ -44,10 +45,12 @@ export class CrudProductPage implements OnInit {
 
       // Os dados do formulário estão em this.productForm.value
       this.productService.newProduct(formData).subscribe({
-        next: (response: any) => {
+        next: async (response: any) => {
           console.log('Produto adicionado:', response);
+          
           this.productForm.reset()
           this.productService.updateObservableProducts();
+          await this.presentToast("create")
         },
         error: (error: any) => {
           console.error('Erro ao adicionar produto:', error);
@@ -74,9 +77,10 @@ export class CrudProductPage implements OnInit {
     const codigo = produto.cod_de_barras
 
     this.productService.deleteProduct(codigo).subscribe({
-      next: (response: any) => {
+      next: async (response: any) => {
         console.log('Produto removido com sucesso:', response);
         this.productService.updateObservableProducts();
+        await this.presentToast("delete")
       },
       error: (error: any) => {
         console.error('Falha ao remover produto:', error);
@@ -92,7 +96,27 @@ export class CrudProductPage implements OnInit {
       }
     });
     modal.present();
-
   }
 
+  async presentToast(operation: string) {
+    if (operation === 'create') {
+      const toast = await this.toastController.create({
+        message: 'Produto registrado com sucesso!',
+        duration: 1500,
+        position: 'top',
+      });
+
+      await toast.present();
+    }
+
+    if (operation === 'delete') {
+      const toast = await this.toastController.create({
+        message: 'Produto removido com sucesso!',
+        duration: 1500,
+        position: 'top',
+      });
+
+      await toast.present();
+    }
+  }
 }
