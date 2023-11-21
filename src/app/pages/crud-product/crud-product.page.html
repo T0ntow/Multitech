@@ -47,8 +47,9 @@
     </ion-card>
 
     <ion-card class="datas">
-      <ion-grid class="table-container">
+      <ion-input type="text" id="search-input" placeholder="Pesquisar produto" label="Search" (keyup)="searchProduct($event)"></ion-input>
 
+      <ion-grid class="table-container">
         <ion-row class="table-row">
           <ion-col class="table-col table-header">Código</ion-col>
           <ion-col class="table-col table-header">Nome</ion-col>

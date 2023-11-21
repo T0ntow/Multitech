@@ -4,13 +4,14 @@ import { ProductService } from 'src/app/services/product.service';
 import { ModalController } from '@ionic/angular';
 import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
 import { ToastController } from '@ionic/angular';
+
 @Component({
   selector: 'app-crud-product',
   templateUrl: './crud-product.page.html',
   styleUrls: ['./crud-product.page.scss'],
 })
-export class CrudProductPage implements OnInit {
 
+export class CrudProductPage implements OnInit {
   productForm: FormGroup;
   produtos: any[] = [];
 
@@ -43,7 +44,6 @@ export class CrudProductPage implements OnInit {
     if (this.productForm.valid) {
       const formData = this.productForm.value;
 
-      // Os dados do formulário estão em this.productForm.value
       this.productService.newProduct(formData).subscribe({
         next: async (response: any) => {
           console.log('Produto adicionado:', response);
@@ -98,6 +98,27 @@ export class CrudProductPage implements OnInit {
     modal.present();
   }
 
+  searchProduct(event: any) {
+    const searchTerm = event.target.value
+    console.log("termo: " + searchTerm);
+  
+    if (searchTerm) {
+      this.productService.getProducts().subscribe({
+        next: (response: any) => {
+          console.log('Produtos recuperados:', response);
+          this.produtos = response.filter((produto: {nome: string}) =>
+            produto.nome.toLowerCase().includes(searchTerm)
+          );
+        },
+        error: (error: any) => {
+          console.error('Falha ao recuperar produtos:', error);
+        }
+      });
+    } else {
+      this.getProducts();
+    }
+  }
+  
   async presentToast(operation: string) {
     if (operation === 'create') {
       const toast = await this.toastController.create({
