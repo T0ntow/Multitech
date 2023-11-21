@@ -99,15 +99,14 @@ export class CrudProductPage implements OnInit {
   }
 
   searchProduct(event: any) {
-    const searchTerm = event.target.value
-    console.log("termo: " + searchTerm);
+    const searchTerm = event.target.value; // Remove espaços em branco extras
   
     if (searchTerm) {
       this.productService.getProducts().subscribe({
         next: (response: any) => {
           console.log('Produtos recuperados:', response);
-          this.produtos = response.filter((produto: {nome: string}) =>
-            produto.nome.toLowerCase().includes(searchTerm)
+          this.produtos = response.filter((produto: { nome: string; cod_de_barras: number; }) =>
+            produto.nome.toLowerCase().includes(searchTerm.toLowerCase()) || produto.cod_de_barras.toString().includes(searchTerm)
           );
         },
         error: (error: any) => {
@@ -118,6 +117,7 @@ export class CrudProductPage implements OnInit {
       this.getProducts();
     }
   }
+  
   
   async presentToast(operation: string) {
     if (operation === 'create') {
