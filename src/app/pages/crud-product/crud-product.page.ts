@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
-import { ModalController } from '@ionic/angular';
+import { ModalController, LoadingController } from '@ionic/angular'; // Importe o LoadingController
 import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
 import { ToastController } from '@ionic/angular';
 
@@ -19,7 +19,9 @@ export class CrudProductPage implements OnInit {
     private formBuilder: FormBuilder,
     private productService: ProductService,
     private modalCtrl: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private loadingController: LoadingController // Injete o LoadingController
+
   ) {
 
     this.productService.getObservableProducts().subscribe(isUpdated => {
@@ -47,7 +49,7 @@ export class CrudProductPage implements OnInit {
       this.productService.newProduct(formData).subscribe({
         next: async (response: any) => {
           console.log('Produto adicionado:', response);
-          
+
           this.productForm.reset()
           this.productService.updateObservableProducts();
           await this.presentToast("create")
@@ -61,17 +63,28 @@ export class CrudProductPage implements OnInit {
     }
   }
 
-  getProducts() {
+  async getProducts() {
+    const loading = await this.loadingController.create({
+      message: 'Carregando produtos...', // Mensagem exibida no loading
+      spinner: 'crescent', // Escolha um tipo de spinner
+      translucent: true,
+    });
+
+    await loading.present();
+
     this.productService.getProducts().subscribe({
       next: (response: any) => {
         console.log('Produtos recuperados:', response);
-        this.produtos = response
+        this.produtos = response;
+        loading.dismiss(); // Dispensa o loading quando os dados são carregados
       },
       error: (error: any) => {
         console.error('Falha ao recuperar produtos:', error);
-      }
+        loading.dismiss(); // Dispensa o loading em caso de erro
+      },
     });
   }
+
 
   deleteProduct(produto: any) {
     const codigo = produto.cod_de_barras
@@ -100,7 +113,7 @@ export class CrudProductPage implements OnInit {
 
   searchProduct(event: any) {
     const searchTerm = event.target.value; // Remove espaços em branco extras
-  
+
     if (searchTerm) {
       this.productService.getProducts().subscribe({
         next: (response: any) => {
@@ -117,8 +130,8 @@ export class CrudProductPage implements OnInit {
       this.getProducts();
     }
   }
-  
-  
+
+
   async presentToast(operation: string) {
     if (operation === 'create') {
       const toast = await this.toastController.create({

@@ -76,11 +76,7 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
-@media (prefers-color-scheme: dark) {
-  /*
-   * Dark Colors
-   * -------------------------------------------
-   */
+@media (prefers-color-scheme: dark), (prefers-color-scheme: light){
 
   body {
     --ion-color-primary: #428cff;
