@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from 'src/app/services/product.service';
-import { ModalController, LoadingController } from '@ionic/angular'; // Importe o LoadingController
+import { ModalController, LoadingController } from '@ionic/angular';
 import { EditProductComponent } from 'src/app/modals/edit-product/edit-product.component';
 import { ToastController } from '@ionic/angular';
 
@@ -20,8 +20,7 @@ export class CrudProductPage implements OnInit {
     private productService: ProductService,
     private modalCtrl: ModalController,
     private toastController: ToastController,
-    private loadingController: LoadingController // Injete o LoadingController
-
+    private loadingController: LoadingController
   ) {
 
     this.productService.getObservableProducts().subscribe(isUpdated => {
@@ -65,8 +64,8 @@ export class CrudProductPage implements OnInit {
 
   async getProducts() {
     const loading = await this.loadingController.create({
-      message: 'Carregando produtos...', // Mensagem exibida no loading
-      spinner: 'crescent', // Escolha um tipo de spinner
+      message: 'Carregando produtos...',
+      spinner: 'crescent',
       translucent: true,
     });
 
@@ -76,15 +75,14 @@ export class CrudProductPage implements OnInit {
       next: (response: any) => {
         console.log('Produtos recuperados:', response);
         this.produtos = response;
-        loading.dismiss(); // Dispensa o loading quando os dados são carregados
+        loading.dismiss(); 
       },
       error: (error: any) => {
         console.error('Falha ao recuperar produtos:', error);
-        loading.dismiss(); // Dispensa o loading em caso de erro
+        loading.dismiss();
       },
     });
   }
-
 
   deleteProduct(produto: any) {
     const codigo = produto.cod_de_barras
@@ -112,7 +110,7 @@ export class CrudProductPage implements OnInit {
   }
 
   searchProduct(event: any) {
-    const searchTerm = event.target.value; // Remove espaços em branco extras
+    const searchTerm = event.target.value;
 
     if (searchTerm) {
       this.productService.getProducts().subscribe({
@@ -130,7 +128,6 @@ export class CrudProductPage implements OnInit {
       this.getProducts();
     }
   }
-
 
   async presentToast(operation: string) {
     if (operation === 'create') {
